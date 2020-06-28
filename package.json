@@ -4,7 +4,8 @@
   "description": "Whitelist users in a Discord channel on a Minecraft server",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,16 @@
   "bugs": {
     "url": "https://github.com/AlthalusAvan/discord-minecraft-whitelist/issues"
   },
-  "homepage": "https://github.com/AlthalusAvan/discord-minecraft-whitelist#readme"
+  "homepage": "https://github.com/AlthalusAvan/discord-minecraft-whitelist#readme",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "fs": "0.0.1-security"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "nodemon": "^2.0.4",
+    "prettier-eslint": "^9.0.1"
+  }
 }

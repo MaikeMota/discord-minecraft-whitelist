@@ -1,0 +1,19 @@
+{
+  "name": "discord-minecraft-whitelist",
+  "version": "0.0.1",
+  "description": "Whitelist users in a Discord channel on a Minecraft server",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlthalusAvan/discord-minecraft-whitelist.git"
+  },
+  "author": "AlthalusAvan",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/AlthalusAvan/discord-minecraft-whitelist/issues"
+  },
+  "homepage": "https://github.com/AlthalusAvan/discord-minecraft-whitelist#readme"
+}

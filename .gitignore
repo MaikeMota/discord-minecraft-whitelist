@@ -22,10 +22,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-<<<<<<< HEAD
 .env
 config.json
-bfg-1.13.0.jar
-=======
-.env
->>>>>>> e20b8bd2ffdac7551dcb4687f6ab0891a5d2f2fc
+players.json

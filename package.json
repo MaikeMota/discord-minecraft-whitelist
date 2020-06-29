@@ -18,8 +18,11 @@
   },
   "homepage": "https://github.com/AlthalusAvan/discord-minecraft-whitelist#readme",
   "dependencies": {
+    "cron": "^1.8.2",
     "discord.js": "^12.2.0",
-    "fs": "0.0.1-security"
+    "fs": "0.0.1-security",
+    "lowdb": "^1.0.0",
+    "rcon-client": "^4.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

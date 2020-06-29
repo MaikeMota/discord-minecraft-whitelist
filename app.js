@@ -4,6 +4,7 @@ const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const CronJob = require('cron').CronJob;
 const checkSubs = require('./helpers/checkSubs');
+const { sendRcon } = require('./helpers/rcon');
 
 const { token, prefix, channels } = config;
 
@@ -29,6 +30,20 @@ const cooldowns = new Discord.Collection();
 client.once('ready', () => {
   console.clear();
   console.log(`Logged in as ${client.user.tag}! Ready to start working.`);
+
+  if (config.showPlayerNumbers) {
+    setInterval(() => {
+      sendRcon('list').then((reply) => {
+        let players = reply.match(/\d+/g).map(Number);
+        client.user.setPresence({
+          activity: {
+            name: `${players[0]}/${players[1]} players`,
+            type: 'WATCHING',
+          },
+        });
+      });
+    }, 5000);
+  }
 });
 
 client.on('message', (message) => {

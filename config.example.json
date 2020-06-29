@@ -14,6 +14,7 @@
   },
   "showPlayerNumbers": true,
   "subRole": "727250403774955591",
+  "playerNumberRefreshtime": 15000,
   "timeZone": "Europe/Dublin",
   "token": "DISCORDAPPTOKEN"
 }

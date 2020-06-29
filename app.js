@@ -42,7 +42,7 @@ client.once('ready', () => {
           },
         });
       });
-    }, 5000);
+    }, config.playerNumberRefreshtime);
   }
 });
 

@@ -1,0 +1,19 @@
+{
+  "channels": {
+    "debug": "CHANNELID",
+    "primary": "CHANNELID"
+  },
+  "cronTab": "00 00 02 * * *",
+  "enableCronJob": true,
+  "gracePeriod": 2,
+  "prefix": "!mc ",
+  "server": {
+    "host": "localhost",
+    "password": "1234",
+    "port": "25575"
+  },
+  "showPlayerNumbers": true,
+  "subRole": "727250403774955591",
+  "timeZone": "Europe/Dublin",
+  "token": "DISCORDAPPTOKEN"
+}

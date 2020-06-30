@@ -62,7 +62,7 @@ client.on('message', (message) => {
 
   if (
     message.channel.type !== 'dm' &&
-    message.channel.id !== channels.role &&
+    message.channel.id !== channels.primary &&
     message.channel.id !== channels.debug
   ) {
     return;

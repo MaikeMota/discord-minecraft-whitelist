@@ -12,7 +12,7 @@ const checkSubs = () => {
 
   global.client.channels.cache
     .get(config.channels.debug)
-    .send('Updating values for all users')
+    .send('Checking all users')
     .then((message) => {
       for (let player of players) {
         if (!player.whitelisted) {

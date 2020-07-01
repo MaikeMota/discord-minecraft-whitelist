@@ -34,7 +34,7 @@ client.once('ready', () => {
   if (config.showPlayerNumbers) {
     setInterval(() => {
       sendRcon('list').then((reply) => {
-        let players = reply.match(/\d+/g).map(Number);
+        let players = reply.match(/(?<!§)\d+/g).map(Number);
         client.user.setPresence({
           activity: {
             name: `${players[0]}/${players[1]} players`,

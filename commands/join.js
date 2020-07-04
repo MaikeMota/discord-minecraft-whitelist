@@ -1,6 +1,6 @@
 const { sendRcon } = require('../helpers/rcon.js');
 const { getPlayer, updatePlayer, createPlayer } = require('../helpers/player');
-const { subRole } = require('../config.json');
+const { subRole, address } = require('../config.json');
 
 module.exports = {
   args: true,
@@ -45,6 +45,10 @@ module.exports = {
       ) {
         updatePlayer(id, { whitelisted: true });
         message.reply("You've been added to the whitelist!");
+        message.author.send(
+          'You can join the server at the following address: \n' +
+            `\`${address}\``
+        );
       } else {
         message.reply(
           'There was an error adding you to the whitelist. The server returned this message: ' +

@@ -10,7 +10,7 @@ module.exports = {
   execute(message, args) {
     if (message.channel.id !== channels.debug) return;
     sendRcon(args.join(' ')).then((reply) => {
-      message.reply(reply.replace(/§[0-9a-z]+/g, ''));
+      message.reply(reply.replace(/§[a-z]|§[0-9]+/g, ''));
     });
   },
 };

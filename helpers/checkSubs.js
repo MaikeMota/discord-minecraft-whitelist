@@ -28,6 +28,7 @@ const checkSubs = () => {
             cyclesSinceSubLost: false,
             whitelisted: false,
           });
+          users.removed.push(discordMember.displayName);
           continue;
         }
 

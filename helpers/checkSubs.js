@@ -21,6 +21,16 @@ const checkSubs = () => {
 
         let discordMember = message.guild.members.cache.get(player.discordID);
 
+        if (!discordMember) {
+          sendRcon(`whitelist remove ${player.minecraftUser}`);
+          updatePlayer(player.discordID, {
+            subbed: false,
+            cyclesSinceSubLost: false,
+            whitelisted: false,
+          });
+          continue;
+        }
+
         if (discordMember.roles.cache.has(config.subRole)) {
           if (!player.subbed) {
             updatePlayer(player.discordID, {

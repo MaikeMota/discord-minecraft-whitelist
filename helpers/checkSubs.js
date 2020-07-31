@@ -60,7 +60,6 @@ const checkSubs = () => {
             updatePlayer(player.discordID, {
               subbed: false,
               cyclesSinceSubLost: cycles,
-              whitelisted: false,
             });
 
             users.gracePeriod.push(discordMember.displayName);

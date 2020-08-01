@@ -1,5 +1,5 @@
 const config = require('../config.json');
-const { updatePlayer } = require('./player');
+const { updatePlayer, removePlayer } = require('./player');
 const { sendRcon } = require('./rcon');
 const Discord = require('discord.js');
 
@@ -23,12 +23,7 @@ const checkSubs = () => {
 
         if (!discordMember) {
           sendRcon(`whitelist remove ${player.minecraftUser}`);
-          updatePlayer(player.discordID, {
-            subbed: false,
-            cyclesSinceSubLost: false,
-            whitelisted: false,
-          });
-          users.removed.push(discordMember.displayName);
+          removePlayer('id', player.discordID);
           continue;
         }
 

@@ -127,8 +127,4 @@ if (config.enableCronJob) {
   job.start();
 }
 
-process.on('uncaughtException', function (err) {
-  console.error(err);
-});
-
 client.login(token);

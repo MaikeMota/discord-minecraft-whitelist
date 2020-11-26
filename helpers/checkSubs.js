@@ -16,11 +16,10 @@ const checkSubs = () => {
     .send('Checking all users')
     .then(async (message) => {
       for (let player of players) {
-        console.log(player);
-
         message.guild.members
           .fetch(player.discordID)
           .then((discordMember) => {
+            console.log(player);
             if (discordMember.roles.cache.has(config.subRole)) {
               console.log(`${player.minecraftUser} is subscribed`);
               if (!player.subbed) {

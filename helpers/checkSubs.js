@@ -5,6 +5,7 @@ const Discord = require('discord.js');
 
 const checkSubs = () => {
   const players = global.db.get('players').value();
+  console.log(players.length);
   let users = {
     removed: [],
     gracePeriod: [],

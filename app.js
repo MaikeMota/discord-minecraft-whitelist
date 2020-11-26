@@ -1,4 +1,5 @@
 const config = require('./config.json');
+
 const fs = require('fs');
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
@@ -127,4 +128,9 @@ if (config.enableCronJob) {
   job.start();
 }
 
+client.on('error', (error) => {
+	console.error(error);
+})
+
+console.log('logging in');
 client.login(token);

@@ -15,26 +15,38 @@ const checkSubs = () => {
     .send('Checking all users')
     .then((message) => {
       for (let player of players) {
-        if (!player.whitelisted) {
-          continue;
-        }
-
+        const log = [];
+        log.push(`Checking player ${player.minecraftUser}`);
         let discordMember = message.guild.members.cache.get(player.discordID);
 
         if (!discordMember) {
+          log.push(
+            `User is no longer in Discord, removing from the whitelist and the system`
+          );
           sendRcon(`whitelist remove ${player.minecraftUser}`);
           removePlayer('id', player.discordID);
           continue;
         }
 
         if (discordMember.roles.cache.has(config.subRole)) {
+          log.push(`User is subscribed`);
           if (!player.subbed) {
+            console.log(
+              `User had lost subscription, adding it back and ensuring they're on the whitelist`
+            );
             updatePlayer(player.discordID, {
               subbed: true,
               cyclesSinceSubLost: false,
             });
+            sendRcon(`whitelist add ${player.minecraftUser}`);
           }
 
+          continue;
+        }
+
+        log.push(`User is not subscribed`);
+        if (!player.whitelisted) {
+          console.log(`User is not on the whitelist, ignoring them`);
           continue;
         }
 
@@ -43,6 +55,9 @@ const checkSubs = () => {
           cycles += 1;
 
           if (cycles >= config.gracePeriod) {
+            log.push(
+              'User has exceeded the grace period, removing from the whitelist'
+            );
             sendRcon(`whitelist remove ${player.minecraftUser}`);
             updatePlayer(player.discordID, {
               subbed: false,
@@ -52,6 +67,9 @@ const checkSubs = () => {
 
             users.removed.push(discordMember.displayName);
           } else {
+            log.push(
+              'User is within the grace period, updating their information'
+            );
             updatePlayer(player.discordID, {
               subbed: false,
               cyclesSinceSubLost: cycles,
@@ -60,6 +78,9 @@ const checkSubs = () => {
             users.gracePeriod.push(discordMember.displayName);
           }
         } else {
+          log.push(
+            'User has started the grace period, updating their information'
+          );
           updatePlayer(player.discordID, {
             subbed: false,
             cyclesSinceSubLost: 1,
@@ -67,6 +88,8 @@ const checkSubs = () => {
 
           users.gracePeriod.push(discordMember.displayName);
         }
+
+        console.log(log.join('. '));
       }
 
       const embedReport = new Discord.MessageEmbed()

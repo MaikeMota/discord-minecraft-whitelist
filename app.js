@@ -129,8 +129,12 @@ if (config.enableCronJob) {
 }
 
 client.on('error', (error) => {
-	console.error(error);
-})
+  console.error(error);
+});
+
+client.on('rateLimit', (rateLimit) => {
+  console.error(rateLimit);
+});
 
 console.log('logging in');
 client.login(token);

@@ -24,8 +24,8 @@ const checkSubs = () => {
           console.log(
             `${player.minecraftUser} is no longer in Discord, removing from the whitelist and the system`
           );
-          //sendRcon(`whitelist remove ${player.minecraftUser}`);
-          //removePlayer('id', player.discordID);
+          sendRcon(`whitelist remove ${player.minecraftUser}`);
+          removePlayer('id', player.discordID);
           continue;
         }
 
@@ -39,7 +39,7 @@ const checkSubs = () => {
               subbed: true,
               cyclesSinceSubLost: false,
             });
-            //sendRcon(`whitelist add ${player.minecraftUser}`);
+            sendRcon(`whitelist add ${player.minecraftUser}`);
           }
 
           continue;
@@ -60,26 +60,22 @@ const checkSubs = () => {
             console.log(
               `${player.minecraftUser} has exceeded the grace period, removing from the whitelist`
             );
-            //sendRcon(`whitelist remove ${player.minecraftUser}`);
-            /*
-						updatePlayer(player.discordID, {
+            sendRcon(`whitelist remove ${player.minecraftUser}`);
+            updatePlayer(player.discordID, {
               subbed: false,
               cyclesSinceSubLost: false,
               whitelisted: false,
-						});
-						*/
+            });
 
             users.removed.push(discordMember.displayName);
           } else {
             console.log(
               `${player.minecraftUser} is within the grace period, updating their information`
             );
-            /*
             updatePlayer(player.discordID, {
               subbed: false,
               cyclesSinceSubLost: cycles,
             });
-						*/
 
             users.gracePeriod.push(discordMember.displayName);
           }
@@ -87,12 +83,10 @@ const checkSubs = () => {
           console.log(
             `${player.minecraftUser} has started the grace period, updating their information`
           );
-          /*
           updatePlayer(player.discordID, {
             subbed: false,
             cyclesSinceSubLost: 1,
-					});
-					*/
+          });
 
           users.gracePeriod.push(discordMember.displayName);
         }

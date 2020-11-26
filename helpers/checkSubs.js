@@ -3,7 +3,7 @@ const { updatePlayer, removePlayer } = require('./player');
 const { sendRcon } = require('./rcon');
 const Discord = require('discord.js');
 
-const checkSubs = () => {
+const checkSubs = async () => {
   const players = global.db.get('players').value();
   console.log(players.length);
   let users = {
@@ -16,8 +16,9 @@ const checkSubs = () => {
     .send('Checking all users')
     .then((message) => {
       for (let player of players) {
-        console.log(player);
-        let discordMember = message.guild.members.cache.get(player.discordID);
+				console.log(player);
+				
+        let discordMember = await message.guild.members.cache.get(player.discordID);
         console.log(discordMember);
 
         if (!discordMember) {

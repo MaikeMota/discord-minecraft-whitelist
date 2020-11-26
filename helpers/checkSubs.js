@@ -16,14 +16,12 @@ const checkSubs = () => {
     .send('Checking all users')
     .then((message) => {
       for (let player of players) {
-        console.log('Tick');
-        const userLog = [];
-        userLog.push(`Checking player ${player.minecraftUser}`);
+        console.log(player);
         let discordMember = message.guild.members.cache.get(player.discordID);
 
         if (!discordMember) {
-          userLog.push(
-            `User is no longer in Discord, removing from the whitelist and the system`
+          console.log(
+            `${player.minecraftUser} is no longer in Discord, removing from the whitelist and the system`
           );
           sendRcon(`whitelist remove ${player.minecraftUser}`);
           removePlayer('id', player.discordID);
@@ -31,10 +29,10 @@ const checkSubs = () => {
         }
 
         if (discordMember.roles.cache.has(config.subRole)) {
-          log.push(`User is subscribed`);
+          console.log(`${player.minecraftUser} is subscribed`);
           if (!player.subbed) {
-            userLog.push(
-              `User had lost subscription, adding it back and ensuring they're on the whitelist`
+            console.log(
+              `${player.minecraftUser} had lost subscription, adding it back and ensuring they're on the whitelist`
             );
             updatePlayer(player.discordID, {
               subbed: true,
@@ -46,9 +44,10 @@ const checkSubs = () => {
           continue;
         }
 
-        userLog.push(`User is not subscribed`);
         if (!player.whitelisted) {
-          console.log(`User is not on the whitelist, ignoring them`);
+          console.log(
+            `${player.minecraftUser} is not on the whitelist, ignoring them`
+          );
           continue;
         }
 
@@ -57,8 +56,8 @@ const checkSubs = () => {
           cycles += 1;
 
           if (cycles >= config.gracePeriod) {
-            userLog.push(
-              'User has exceeded the grace period, removing from the whitelist'
+            console.log(
+              `${player.minecraftUser} has exceeded the grace period, removing from the whitelist`
             );
             sendRcon(`whitelist remove ${player.minecraftUser}`);
             updatePlayer(player.discordID, {
@@ -69,8 +68,8 @@ const checkSubs = () => {
 
             users.removed.push(discordMember.displayName);
           } else {
-            userLog.push(
-              'User is within the grace period, updating their information'
+            console.log(
+              `${player.minecraftUser} is within the grace period, updating their information`
             );
             updatePlayer(player.discordID, {
               subbed: false,
@@ -80,8 +79,8 @@ const checkSubs = () => {
             users.gracePeriod.push(discordMember.displayName);
           }
         } else {
-          userLog.push(
-            'User has started the grace period, updating their information'
+          console.log(
+            `${player.minecraftUser} has started the grace period, updating their information`
           );
           updatePlayer(player.discordID, {
             subbed: false,
@@ -90,8 +89,6 @@ const checkSubs = () => {
 
           users.gracePeriod.push(discordMember.displayName);
         }
-
-        console.log(userLog.join('. '));
       }
 
       const embedReport = new Discord.MessageEmbed()

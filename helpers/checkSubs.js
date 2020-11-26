@@ -34,14 +34,14 @@ const checkSubs = () => {
                 //sendRcon(`whitelist add ${player.minecraftUser}`);
               }
 
-              continue;
+              return;
             }
 
             if (!player.whitelisted) {
               console.log(
                 `${player.minecraftUser} is not on the whitelist, ignoring them`
               );
-              continue;
+              return;
             }
 
             if (player.cyclesSinceSubLost || config.gracePeriod === 0) {
@@ -95,7 +95,7 @@ const checkSubs = () => {
             );
             //sendRcon(`whitelist remove ${player.minecraftUser}`);
             //removePlayer('id', player.discordID);
-            continue;
+            return;
           });
       }
 

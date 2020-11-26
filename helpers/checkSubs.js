@@ -16,18 +16,11 @@ const checkSubs = () => {
     .send('Checking all users')
     .then(async (message) => {
       for (let player of players) {
-        console.log(player);
-
         var discordMember = null;
 
         try {
           discordMember = await message.guild.members.fetch(player.discordID);
         } catch (e) {
-          console.error(e);
-        }
-        console.log(discordMember);
-
-        if (!discordMember) {
           console.log(
             `${player.minecraftUser} is no longer in Discord, removing from the whitelist and the system`
           );

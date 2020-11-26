@@ -18,6 +18,7 @@ const checkSubs = () => {
       for (let player of players) {
         console.log(player);
         let discordMember = message.guild.members.cache.get(player.discordID);
+        console.log(discordMember);
 
         if (!discordMember) {
           console.log(

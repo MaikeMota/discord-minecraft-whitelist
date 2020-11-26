@@ -18,9 +18,7 @@ const checkSubs = () => {
       for (let player of players) {
         console.log(player);
 
-        let discordMember = await message.guild.members.cache.get(
-          player.discordID
-        );
+        let discordMember = await message.guild.members.fetch(player.discordID);
         console.log(discordMember);
 
         if (!discordMember) {

@@ -30,17 +30,14 @@ const checkSubs = () => {
         }
 
         if (discordMember.roles.cache.has(config.subRole)) {
-          console.log(`${player.minecraftUser} is subscribed`);
-          if (!player.subbed) {
-            console.log(
-              `${player.minecraftUser} had lost subscription, adding it back and ensuring they're on the whitelist`
-            );
-            updatePlayer(player.discordID, {
-              subbed: true,
-              cyclesSinceSubLost: false,
-            });
-            sendRcon(`whitelist add ${player.minecraftUser}`);
-          }
+          console.log(
+            `${player.minecraftUser} is subscribed, ensuring they're on the whitelist`
+          );
+          updatePlayer(player.discordID, {
+            subbed: true,
+            cyclesSinceSubLost: false,
+          });
+          sendRcon(`whitelist add ${player.minecraftUser}`);
 
           continue;
         }
